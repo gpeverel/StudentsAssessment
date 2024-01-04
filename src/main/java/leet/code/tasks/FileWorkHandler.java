@@ -2,13 +2,15 @@ package leet.code.tasks;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
-public class MenuCommands {
-	private static String newFilePath = null;
+public class FileWorkHandler {
+	public static String newFilePath = null;
 
-
+	/**
+	 * Работаем с файлами. Создаем новый или загружаем данные из старого
+	 * @param result выбор пользователя
+	 * @return список данных о студентах
+	 */
 	public static ArrayList<Student> workWithFile(final int result) {
 		if (result == 1) {
 			return getAlreadyExistsDataFromFile();
@@ -55,14 +57,7 @@ public class MenuCommands {
 							.replaceAll(" ", "")
 							.split(",");
 
-					ArrayList<Integer> assessmentList = Arrays.stream(assessments)
-							.filter(MenuCommands::isDigit)
-							.filter(MenuCommands::isValidAssessment)
-							.map(Integer::parseInt)
-							.collect(Collectors.toCollection(ArrayList::new));
-					if (assessments.length == 0 || assessments.length != assessmentList.size()) {
-						throw new Exception("В оценках ученика обнаружены проблемы!");
-					}
+					ArrayList<Integer> assessmentList = AssessmentUtil.getAssessmentList(assessments);
 					final Student student = new Student(studentName, assessmentList);
 					students.add(student);
 				}
@@ -79,25 +74,6 @@ public class MenuCommands {
 			throw new Exception();
 		}
 		return new ArrayList<>();
-	}
-
-	private static boolean isDigit(final String s) {
-		if (s != null && !s.isEmpty()) {
-			for (int i = 0; i < s.length(); i++) {
-				if (!Character.isDigit(s.charAt(i))) {
-					return false;
-				}
-			}
-			return true;
-		}
-		return false;
-	}
-
-	private static boolean isValidAssessment(final String s) {
-		if (s != null && !s.isEmpty()) {
-			return s.equals("2") || s.equals("3") || s.equals("4") || s.equals("5");
-		}
-		return false;
 	}
 
 	private static void setNewFilePath() {
@@ -133,8 +109,4 @@ public class MenuCommands {
 		}
 	}
 
-
-	public static void makeCommand(final ArrayList<Student> students, final int result) {
-		System.out.println("Делаем штуку!");
-	}
 }

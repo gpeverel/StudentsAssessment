@@ -10,10 +10,10 @@ public class Main {
 		ArrayList<Student> students;
 		int userChoice;
 		userChoice = getFileWorkOptionResult();
-		students = MenuCommands.workWithFile(userChoice);
+		students = FileWorkHandler.workWithFile(userChoice);
 		while(true) {
 			userChoice = getMainMenuWorkOptionResult();
-			MenuCommands.makeCommand(students, userChoice);
+			MainMenuCommands.makeCommand(students, userChoice);
 			if (userChoice == 8) {
 				return;
 			}
