@@ -5,17 +5,16 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Main {
-	public static MenuCommands menuCommands;
 
 	public static void main(String[] args) {
 		ArrayList<Student> students;
-		int result;
-		result = getFileWorkOptionResult();
-		students = MenuCommands.workWithFile(result);
+		int userChoice;
+		userChoice = getFileWorkOptionResult();
+		students = MenuCommands.workWithFile(userChoice);
 		while(true) {
-			result = getMainMenuWorkOptionResult();
-			MenuCommands.makeCommand(students, result);
-			if (result == 8) {
+			userChoice = getMainMenuWorkOptionResult();
+			MenuCommands.makeCommand(students, userChoice);
+			if (userChoice == 8) {
 				return;
 			}
 		}
@@ -44,7 +43,7 @@ public class Main {
 
 	private static int getMainMenuWorkOptionResult() {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		int result = 8;
+		int result;
 		while (true) {
 			try {
 				printMainMenu();
