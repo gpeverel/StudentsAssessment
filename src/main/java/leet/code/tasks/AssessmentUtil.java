@@ -26,12 +26,15 @@ public final class AssessmentUtil {
 	}
 
 	public static ArrayList<Integer> getAssessmentList(String[] assessments) throws Exception {
+		if (assessments.length == 0 || assessments[0].isBlank()) {
+			return new ArrayList<>();
+		}
 		ArrayList<Integer> assessmentList = Arrays.stream(assessments)
 				.filter(AssessmentUtil::isDigit)
 				.filter(AssessmentUtil::isValidAssessment)
 				.map(Integer::parseInt)
 				.collect(Collectors.toCollection(ArrayList::new));
-		if (assessments.length == 0 || assessments.length != assessmentList.size()) {
+		if ( assessments.length != assessmentList.size()) {
 			throw new Exception("В оценках ученика обнаружены проблемы!");
 		}
 		return assessmentList;

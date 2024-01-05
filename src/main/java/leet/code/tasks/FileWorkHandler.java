@@ -52,7 +52,7 @@ public class FileWorkHandler {
 						continue;
 					}
 					int divider = lineText.indexOf(":");
-					String studentName = lineText.substring(0, divider);
+					String studentName = lineText.substring(0, divider).trim();
 					String[] assessments = lineText.substring(divider + 1)
 							.replaceAll(" ", "")
 							.split(",");
@@ -61,6 +61,7 @@ public class FileWorkHandler {
 					final Student student = new Student(studentName, assessmentList);
 					students.add(student);
 				}
+				newFilePath = file.getPath();
 				return students;
 			} catch(IndexOutOfBoundsException e) {
 				System.out.println("Проблемы с данными в файле!");
